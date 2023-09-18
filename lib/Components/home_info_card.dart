@@ -28,6 +28,7 @@ class Home_Info_Card extends StatelessWidget {
           ],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,6 +86,7 @@ class Home_Info_Card extends StatelessWidget {
                     height: 7,
                   ),
                   Row(
+
                     children:  [
                       Text("${list.where((element) => element.isFinish).length} /",style: TextStyle(
                         fontSize: 21,

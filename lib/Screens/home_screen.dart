@@ -6,7 +6,7 @@ import 'package:todo_homework/Screens/add_todo_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_homework/Providers/todo_data_list.dart';
 import 'package:todo_homework/Components/nothing_to_do.dart';
-
+import 'package:http/http.dart' as http;
 
 class Home_Screen extends StatefulWidget {
   const Home_Screen({Key? key}) : super(key: key);
@@ -103,6 +103,18 @@ class _Home_ScreenState extends State<Home_Screen> {
           Container(
             margin: EdgeInsets.only(right: 10),
             child: IconButton(
+              onPressed: ()async{
+                  var response= await http.get(Uri.parse('https://random.imagecdn.app/v1/image?width=500&height=500&category=people') );
+                  var response2= await http.post(Uri.parse('https://random.imagecdn.app/v1/image?width=500&height=500&category=people'),headers:{'connection':'how are you'}  );
+                  print(response.statusCode);
+                  print(response2.headers);
+              },
+              icon: Icon(Icons.account_circle,size: 30,),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            child: IconButton(
               onPressed: (){
                 Autocomplete<String>(
                   fieldViewBuilder: (BuildContext context,
@@ -186,9 +198,36 @@ class _Home_ScreenState extends State<Home_Screen> {
           ],
         ),
 
-      drawer: Container(
-       width: 300,
-        color: Colors.indigoAccent,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children:  <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+
+              ),
+              child: Center(
+                child:
+                Image.network("https://images.unsplash.com/photo-1678004668997-a1d587d104c4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3OTM3NTg0NA&ixlib=rb-4.0.3&q=80&w=500")
+
+              )
+              ),
+
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+          ],
+        ),
       ),
 
     );
